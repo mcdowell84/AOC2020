@@ -18,8 +18,6 @@ for x in [1,3,5,7]:
             treecounter += 1
         steps += x
     multiplier = multiplier * treecounter
-    print('X: ' + str(x) + ', Trees: ' + str(treecounter))
-print('Inbetween: ' + str(multiplier))
 
 
 
@@ -33,10 +31,9 @@ for y in range(len(myList)):
     if steps == len(line):
         steps = 0
     if y % 2 == 0:
-        print(str(y) + ' OK' + line[steps] + str(steps))
         if line[steps] == str('#'):
             treecounter += 1
         steps += 1
 
 multiplier = multiplier * treecounter
-print(multiplier)
+print('Multiplier: ' + str(multiplier))
