@@ -18,7 +18,7 @@ test_file = ['ecl:gry pid:860033327 eyr:2020 hcl:#fffffd',
             '',
             'hcl:#cfa07d eyr:2025 pid:166559648',
             'iyr:2011 ecl:brn hgt:59in']
-#test_file = batches
+test_file = batches
 checklist = ['byr:', 'iyr:', 'eyr:', 'hgt:', 'hcl:', 'ecl:', 'pid:']
 
 newlist = []
@@ -124,8 +124,9 @@ for x in range(len(newlist)):
         tempstring = tempstring + str(7)
     if len(str(pid)) == 9:
         tempstring = tempstring + str(8)
-    print(tempstring)
+
     if len(tempstring) == 7:
         passcount += 1
+        tempstring = ''
 
 print(str(passcount))
