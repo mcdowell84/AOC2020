@@ -33,22 +33,12 @@ for i in range(len(test_file)):
         newlist.append(tempstring)
         tempstring = ''
 
-
-for x in range(len(newlist)):
-    tempstring = ''
-    line = newlist[x]
-    for y in range(len(checklist)):
-        if newlist[x].find(checklist[y]) != -1:
-            tempstring = tempstring + str(1)
-        if tempstring == '1111111':
-            passcount += 1
-
 byrRegex = re.compile(r'(byr:)(\d{4})')
 iyrRegex = re.compile(r'(iyr:)(\d{4})')
 eyrRegex = re.compile(r'(eyr:)(\d{4})')
 hgtRegex = re.compile(r'(hgt:)(\d+)(in|cm)')
 hclRegex = re.compile(r'(hcl:)#([a-f0-9]{6})')
-eclRegex = re.compile(r'(ecl:)([a-z]{3})')
+eclRegex = re.compile(r'(ecl:)(amb|blu|brn|gry|grn|hzl|oth)')
 pidRegex = re.compile(r'(pid:)(\d+)')
 
 passcount = 0
@@ -102,9 +92,9 @@ for x in range(len(newlist)):
 
     mo = pidRegex.search(text)
     if mo == None:
-        pid = -1
+        pid = 'none'
     else:
-        pid = int(mo.group(2))
+        pid = str(mo.group(2))
 
     if 1920 <= byr and 2002 >= byr:
         tempstring = tempstring + str(1)
@@ -112,17 +102,20 @@ for x in range(len(newlist)):
         tempstring = tempstring + str(2)
     if eyr >= 2020 and eyr <= 2030:
         tempstring = tempstring + str(3)
-    if hgt_unit == 'cm':
-        if hgt >= 150 and hgt <= 193:
-            tempstring = tempstring + str(4)
-    if hgt_unit == 'in':
-        if hgt >= 59 and hgt <= 76:
-            tempstring = tempstring + str(5)
+    if hgt_unit == 'none':
+        pass
+    else:
+        if hgt_unit == 'cm':
+            if hgt >= 150 and hgt <= 193:
+                tempstring = tempstring + str(4)
+        if hgt_unit == 'in':
+            if hgt >= 59 and hgt <= 76:
+                tempstring = tempstring + str(5)
     if hcl != 'none':
         tempstring = tempstring + str(6)
-    if ecl == 'amb' or ecl == 'blu' or ecl == 'brn' or ecl == 'gry' or ecl == 'grn' or ecl == 'hzl' or ecl == 'oth':
+    if ecl != 'none':
         tempstring = tempstring + str(7)
-    if len(str(pid)) == 9:
+    if len(pid) == 9:
         tempstring = tempstring + str(8)
 
     if len(tempstring) == 7:
