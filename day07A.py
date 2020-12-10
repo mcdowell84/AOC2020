@@ -18,15 +18,21 @@ testfile = myFile
 
 bagcounter = 0
 tempcounter = 0
-#mainbag = re.match(r'([a-z]+\s[a-z]+) bags contain', line)  # matches first bag of line
-prog = re.compile(r'(?<=\d\s)[a-z]+\s[a-z]+(?=\sbag)')  # matches '[word word]' when preceded by '[number][space]' and followed by ' bag'
 
+
+prog = re.compile(r'(?<=\d\s)[a-z]+\s[a-z]+(?=\sbag)')  # matches '[word word]' when preceded by '[number][space]' and followed by ' bag'
+indexlist = []
+for w in range(len(testfile)):
+        line = testfile[w]
+        mainbag = re.match(r'([a-z]+\s[a-z]+) bags contain', line)  # matches first bag of line
+        mainbag = mainbag.group(1)
+        indexlist.append(mainbag)
 
 #print(len(fillerbags))
 
 def bagcheck(bagindex):
         global tempcounter
-        global lister
+        # global lister
         line = testfile[bagindex]
         # print('>Bag to check: ' + 'L' + str(bagindex) + ' G' + str(lister) + ' - ' + line)
 
@@ -40,18 +46,17 @@ def bagcheck(bagindex):
                                 tempcounter += 1
                                 # print('Gotcha: ' + line)
                                 # print('Bag counter: ' + str(tempcounter))
-                                bagindex = lister
+                                # bagindex = lister
                                 return
 
 
                         else:
-                                for i in testfile:
-                                        if i.startswith(fillerbags[y]):
-                                                newindex = testfile.index(i)
-                                                bagcheck(newindex)
+
+                                newindex = indexlist.index(fillerbags[y])
+                                bagcheck(newindex)
 
 for q in range(len(testfile)):
-        lister = q
+        # lister = q
         bagcheck(q)
         if tempcounter > 0:
                 bagcounter += 1
