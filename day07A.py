@@ -11,7 +11,13 @@ testfile = [
         'faded blue bags contain no other bags.',
         'dotted black bags contain no other bags.']
 
+input = open('input/input07.txt', 'r')
+myFile = input.readlines()
+myFile = [x.replace('\n', '') for x in myFile]
+testfile = myFile
+
 bagcounter = 0
+tempcounter = 0
 #mainbag = re.match(r'([a-z]+\s[a-z]+) bags contain', line)  # matches first bag of line
 prog = re.compile(r'(?<=\d\s)[a-z]+\s[a-z]+(?=\sbag)')  # matches '[word word]' when preceded by '[number][space]' and followed by ' bag'
 
@@ -19,23 +25,23 @@ prog = re.compile(r'(?<=\d\s)[a-z]+\s[a-z]+(?=\sbag)')  # matches '[word word]' 
 #print(len(fillerbags))
 
 def bagcheck(bagindex):
-        global bagcounter
+        global tempcounter
         global lister
         line = testfile[bagindex]
-        print('>Bag to check: ' + 'L' + str(bagindex) + ' G' + str(lister) + ' - ' + line)
+        # print('>Bag to check: ' + 'L' + str(bagindex) + ' G' + str(lister) + ' - ' + line)
 
         fillerbags = prog.findall(line)
         if len(fillerbags)==0:
-                print('>>>Contains no bags')
+                # print('>>>Contains no bags')
                 pass
         if len(fillerbags)>0:
                 for y in range(len(fillerbags)):
                         if fillerbags[y] == 'shiny gold':
-                                bagcounter += 1
-                                print('Gotcha: ' + line)
-                                print('Bag counter: ' + str(bagcounter))
+                                tempcounter += 1
+                                # print('Gotcha: ' + line)
+                                # print('Bag counter: ' + str(tempcounter))
                                 bagindex = lister
-                                break
+                                return
 
 
                         else:
@@ -47,5 +53,8 @@ def bagcheck(bagindex):
 for q in range(len(testfile)):
         lister = q
         bagcheck(q)
+        if tempcounter > 0:
+                bagcounter += 1
+        tempcounter = 0
 
 print(str(bagcounter))
