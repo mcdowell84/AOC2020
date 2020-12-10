@@ -1,8 +1,3 @@
-# recursive function
-# if len[fillerbags]==0 then stop function, go onto next bag
-# if fillerbag is shiny gold bag then add mainbag to list
-# if fillerbag contains other bags then check those fillerbags
-
 import re
 
 testfile = [
