@@ -17,14 +17,10 @@ input = myFile
 
 prog = re.compile(r'([a-z]{3})\s[+|-](\d+)')  # matches 3 letter word +/-number
 
-final = 0
-
 length = len(input)
 # length = 3
 
-
 for x in range(length):
-
         accumulator = 0
         newinput = input.copy()
         line = newinput[x]
@@ -36,10 +32,7 @@ for x in range(length):
                 line = line.replace('jmp', 'nop')
 
         if newinput[x] != line:
-
                 newinput[x] = line
-
-
 
         i = 0
         end = len(newinput) - 1
