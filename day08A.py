@@ -21,12 +21,17 @@ accumulator = 0
 
 i = 0
 end = len(input)-1
+
+
+
+
 while i < end:
         line = input[i]
         splitter = prog.search(line)
         instruct = splitter.group(1)
         number = int(line[4] + str(1)) * int(splitter.group(2))
         n = 0
+
         if instruct == 'stp':
                 print('Stop the clock!')
                 print('acc: ' + str(accumulator))
@@ -40,3 +45,7 @@ while i < end:
 
         input[i] = 'stp +666'
         i += 1 + n
+        if i == len(input)-1:
+                print('End of program reached!')
+                print('acc: ' + str(accumulator))
+                break
