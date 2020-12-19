@@ -40,7 +40,6 @@ testinput =     [28,
 input = testinput
 
 input.sort()
-print(input)
 
 init = 0
 jolt1 = 0
@@ -55,4 +54,3 @@ for i in range(len(input)):
 
 jolt3 += 1
 print(str(jolt1*jolt3))
-print(str(jolt3))
