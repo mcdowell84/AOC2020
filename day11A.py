@@ -31,7 +31,7 @@ prev.append(blankline)
 
 
 def seating(line, prevline, nextline):
-        global runthroughs
+
         newline = '.'
         for place in range(1, len(line)-1):  # check all chairs in line, without padding
 
